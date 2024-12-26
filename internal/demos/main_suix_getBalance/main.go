@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/go-resty/resty/v2"
-	"github.com/go-xlan/sui-go-guide/suijsonrpc"
+	"github.com/go-xlan/sui-go-guide/suirpcmsg"
 	"github.com/yyle88/must"
 	"github.com/yyle88/neatjson/neatjsons"
 	"github.com/yyle88/zaplog"
@@ -28,7 +28,7 @@ type RespType struct {
 func main() {
 	address := "0x207ed5c0ad36b96c730ed0f71e3c26a0ffb59bc20ab21d08067ca4c035d4d062"
 
-	request := suijsonrpc.JsonRpcRequest{
+	request := suirpcmsg.RpcRequest{
 		Jsonrpc: "2.0",
 		Method:  "suix_getCoins",
 		Params: []any{
@@ -37,7 +37,7 @@ func main() {
 		ID: 1,
 	}
 
-	rpcResponse := &suijsonrpc.JsonRpcResponse[RespType]{}
+	rpcResponse := &suirpcmsg.RpcResponse[RespType]{}
 
 	response, err := resty.New().
 		SetTimeout(time.Minute).
