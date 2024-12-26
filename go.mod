@@ -8,6 +8,7 @@ require (
 	github.com/yyle88/erero v1.0.15
 	github.com/yyle88/must v0.0.12
 	github.com/yyle88/neatjson v0.0.10
+	github.com/yyle88/rese v0.0.2
 	github.com/yyle88/zaplog v0.0.17
 	go.uber.org/zap v1.27.0
 	golang.org/x/crypto v0.31.0
