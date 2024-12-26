@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/go-xlan/sui-go-guide/suirpcapi"
-	"github.com/go-xlan/sui-go-guide/suirpcmsg"
+	"github.com/go-xlan/sui-go-guide/suiapi"
+	"github.com/go-xlan/sui-go-guide/suirpc"
 	"github.com/go-xlan/sui-go-guide/suisigntx"
 	"github.com/yyle88/must"
 	"github.com/yyle88/neatjson/neatjsons"
@@ -28,7 +28,7 @@ func main() {
 	const privateKeyHex = "0e51bb6e96264505b7c36c71d6a7f8053ed73b20f6f4476fb4f7877b8934ae6b"
 
 	// 构造 JSON-RPC 请求
-	request := &suirpcmsg.RpcRequest{
+	request := &suirpc.RpcRequest{
 		Jsonrpc: "2.0",
 		Method:  "unsafe_transferSui",
 		Params: []any{
@@ -41,12 +41,12 @@ func main() {
 		ID: 1,
 	}
 
-	rpcResponse, err := suirpcapi.SendRpc[suirpcapi.TxBytesMessage](context.Background(), serverUrl, request)
+	rpcResponse, err := suirpc.SendRpc[suiapi.TxBytesMessage](context.Background(), serverUrl, request)
 	must.Done(err)
 	txBytes := rpcResponse.Result.TxBytes
 
 	{
-		res, err := suirpcapi.SuiDryRunTransactionBlock(context.Background(), serverUrl, txBytes)
+		res, err := suiapi.SuiDryRunTransactionBlock(context.Background(), serverUrl, txBytes)
 		must.Done(err)
 		fmt.Println(neatjsons.S(res))
 	}
@@ -55,7 +55,7 @@ func main() {
 	must.Done(err)
 	fmt.Println("signatures", signatures)
 
-	res, err := suirpcapi.SuiExecuteTransactionBlock(context.Background(), serverUrl, txBytes, signatures)
+	res, err := suiapi.SuiExecuteTransactionBlock(context.Background(), serverUrl, txBytes, signatures)
 	must.Done(err)
 	fmt.Println(neatjsons.S(res))
 }

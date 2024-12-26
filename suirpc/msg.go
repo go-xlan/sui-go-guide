@@ -1,4 +1,4 @@
-package suirpcmsg
+package suirpc
 
 import "github.com/yyle88/erero"
 

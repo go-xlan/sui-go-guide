@@ -1,4 +1,4 @@
-package suirpcapi
+package suirpc
 
 import (
 	"context"
@@ -6,14 +6,13 @@ import (
 	"time"
 
 	"github.com/go-resty/resty/v2"
-	"github.com/go-xlan/sui-go-guide/suirpcmsg"
 	"github.com/yyle88/erero"
 	"github.com/yyle88/neatjson/neatjsons"
 	"github.com/yyle88/zaplog"
 )
 
-func SendRpc[RES any](ctx context.Context, serverUrl string, request *suirpcmsg.RpcRequest) (*suirpcmsg.RpcResponse[RES], error) {
-	resp := &suirpcmsg.RpcResponse[RES]{}
+func SendRpc[RES any](ctx context.Context, serverUrl string, request *RpcRequest) (*RpcResponse[RES], error) {
+	resp := &RpcResponse[RES]{}
 	// 发送 POST 请求
 	response, err := resty.New().
 		SetTimeout(time.Minute).

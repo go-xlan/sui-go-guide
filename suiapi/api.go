@@ -1,14 +1,14 @@
-package suirpcapi
+package suiapi
 
 import (
 	"context"
 
-	"github.com/go-xlan/sui-go-guide/suirpcmsg"
+	"github.com/go-xlan/sui-go-guide/suirpc"
 	"github.com/yyle88/erero"
 )
 
 func SuiDryRunTransactionBlock(ctx context.Context, serverUrl string, txBytes string) (map[string]interface{}, error) {
-	request := &suirpcmsg.RpcRequest{
+	request := &suirpc.RpcRequest{
 		Jsonrpc: "2.0",
 		Method:  "sui_dryRunTransactionBlock",
 		Params: []any{
@@ -16,7 +16,7 @@ func SuiDryRunTransactionBlock(ctx context.Context, serverUrl string, txBytes st
 		},
 		ID: 1,
 	}
-	response, err := SendRpc[map[string]interface{}](ctx, serverUrl, request)
+	response, err := suirpc.SendRpc[map[string]interface{}](ctx, serverUrl, request)
 	if err != nil {
 		return nil, erero.Wro(err)
 	}
@@ -35,7 +35,7 @@ func SuiExecuteTransactionBlock(ctx context.Context, serverUrl string, txBytes s
 	}
 
 	// 构造模拟调用的 JSON RPC 请求
-	request := &suirpcmsg.RpcRequest{
+	request := &suirpc.RpcRequest{
 		Jsonrpc: "2.0",
 		Method:  "sui_executeTransactionBlock",
 		Params: []any{
@@ -54,7 +54,7 @@ func SuiExecuteTransactionBlock(ctx context.Context, serverUrl string, txBytes s
 		},
 		ID: 1,
 	}
-	response, err := SendRpc[map[string]interface{}](ctx, serverUrl, request)
+	response, err := suirpc.SendRpc[map[string]interface{}](ctx, serverUrl, request)
 	if err != nil {
 		return nil, erero.Wro(err)
 	}
