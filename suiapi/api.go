@@ -5,9 +5,10 @@ import (
 
 	"github.com/go-xlan/sui-go-guide/suirpc"
 	"github.com/yyle88/erero"
+	"github.com/yyle88/must"
 )
 
-func SuiDryRunTransactionBlock(ctx context.Context, serverUrl string, txBytes string) (map[string]interface{}, error) {
+func DryRunTransactionBlock[RES any](ctx context.Context, serverUrl string, txBytes string) (*RES, error) {
 	request := &suirpc.RpcRequest{
 		Jsonrpc: "2.0",
 		Method:  "sui_dryRunTransactionBlock",
@@ -16,14 +17,14 @@ func SuiDryRunTransactionBlock(ctx context.Context, serverUrl string, txBytes st
 		},
 		ID: 1,
 	}
-	response, err := suirpc.SendRpc[map[string]interface{}](ctx, serverUrl, request)
+	response, err := suirpc.SendRpc[RES](ctx, serverUrl, request)
 	if err != nil {
 		return nil, erero.Wro(err)
 	}
-	return response.Result, nil
+	return &response.Result, nil
 }
 
-func SuiExecuteTransactionBlock(ctx context.Context, serverUrl string, txBytes string, signatures string) (map[string]interface{}, error) {
+func ExecuteTransactionBlock[RES any](ctx context.Context, serverUrl string, txBytes string, signatures string) (*RES, error) {
 	type TransactionBlockResponseOptions struct {
 		ShowInput          bool `json:"showInput"`
 		ShowRawInput       bool `json:"showRawInput"`
@@ -54,9 +55,38 @@ func SuiExecuteTransactionBlock(ctx context.Context, serverUrl string, txBytes s
 		},
 		ID: 1,
 	}
-	response, err := suirpc.SendRpc[map[string]interface{}](ctx, serverUrl, request)
+	response, err := suirpc.SendRpc[RES](ctx, serverUrl, request)
 	if err != nil {
 		return nil, erero.Wro(err)
 	}
-	return response.Result, nil
+	return &response.Result, nil
+}
+
+func GetSomeSuiCoins(ctx context.Context, serverUrl string, address string) ([]*CoinType, error) {
+	// 构造 JSON-RPC 请求
+	request := &suirpc.RpcRequest{
+		Jsonrpc: "2.0",
+		Method:  "suix_getCoins",
+		Params: []any{
+			address,
+			"0x2::sui::SUI", //default to 0x2::sui::SUI //因此这里不设置也是可以的
+		},
+		ID: 1,
+	}
+
+	type Result struct {
+		Data []*CoinType `json:"data"`
+	}
+
+	response, err := suirpc.SendRpc[Result](ctx, serverUrl, request)
+	if err != nil {
+		return nil, erero.Wro(err)
+	}
+
+	coins := response.Result.Data
+	for _, coin := range coins {
+		must.Same("0x2::sui::SUI", coin.CoinType)
+	}
+
+	return coins, nil
 }

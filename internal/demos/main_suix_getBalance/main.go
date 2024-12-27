@@ -23,7 +23,9 @@ type GetCoinsResponse struct {
 }
 
 func main() {
+	// 测试网络
 	const serverUrl = "https://fullnode.testnet.sui.io/"
+	// 钱包地址
 	const address = "0x207ed5c0ad36b96c730ed0f71e3c26a0ffb59bc20ab21d08067ca4c035d4d062"
 
 	request := suirpc.RpcRequest{
