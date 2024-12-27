@@ -24,3 +24,12 @@ type CoinType struct {
 	PreviousTransaction string `json:"previousTransaction"`
 	Version             string `json:"version"`
 }
+
+type CoinMetadata struct {
+	Decimals    int    `json:"decimals"`
+	Description string `json:"description"`
+	IconUrl     string `json:"iconUrl"`
+	Id          string `json:"id"`
+	Name        string `json:"name"`
+	Symbol      string `json:"symbol"`
+}
