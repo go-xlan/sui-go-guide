@@ -11,12 +11,12 @@ import (
 )
 
 func main() {
-	const serverUrl = "https://fullnode.mainnet.sui.io/"
+	const serverUrl = "https://fullnode.testnet.sui.io/"
 
 	suirpc.SetDebugMode(false)
 
 	// 要查询余额的地址
-	address := "0x2f76f93951df4d4b165a33f41978dfe6040db97ea2dc220602d5c163e9cd3d89"
+	address := "0x207ed5c0ad36b96c730ed0f71e3c26a0ffb59bc20ab21d08067ca4c035d4d062"
 
 	// 构造 JSON-RPC 请求
 	request := &suirpc.RpcRequest{
@@ -24,6 +24,7 @@ func main() {
 		Method:  "suix_getCoins",
 		Params: []any{
 			address,
+			"0x2::sui::SUI", //default to 0x2::sui::SUI //因此这里不设置也是可以的
 		},
 		ID: 1,
 	}

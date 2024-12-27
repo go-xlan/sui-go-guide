@@ -12,7 +12,7 @@ import (
 	"github.com/yyle88/zaplog"
 )
 
-var debugModeOpen = true
+var debugModeOpen = false
 
 func SetDebugMode(enable bool) {
 	debugModeOpen = enable

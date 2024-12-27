@@ -2,8 +2,10 @@ package suiwallet
 
 import (
 	"crypto/ed25519"
+	"encoding/hex"
 	"fmt"
 
+	"github.com/yyle88/erero"
 	"golang.org/x/crypto/blake2b"
 )
 
@@ -26,6 +28,14 @@ func NewWallet(seed []byte) (*Wallet, error) {
 		PublicKey:  publicKey,
 		AuthKey:    hash,
 	}, nil
+}
+
+func NewWalletV2(privateKeyHex string) (*Wallet, error) {
+	privateKey, err := hex.DecodeString(privateKeyHex)
+	if err != nil {
+		return nil, erero.Wro(err)
+	}
+	return NewWallet(privateKey)
 }
 
 func (kp *Wallet) Address() string {
