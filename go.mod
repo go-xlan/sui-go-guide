@@ -9,12 +9,14 @@ require (
 	github.com/yyle88/must v0.0.12
 	github.com/yyle88/neatjson v0.0.10
 	github.com/yyle88/rese v0.0.2
+	github.com/yyle88/simplejsonx v0.0.6
 	github.com/yyle88/zaplog v0.0.17
 	go.uber.org/zap v1.27.0
 	golang.org/x/crypto v0.31.0
 )
 
 require (
+	github.com/bitly/go-simplejson v0.5.1 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect

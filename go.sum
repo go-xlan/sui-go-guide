@@ -1,3 +1,5 @@
+github.com/bitly/go-simplejson v0.5.1 h1:xgwPbetQScXt1gh9BmoJ6j9JMr3TElvuIyjR8pgdoow=
+github.com/bitly/go-simplejson v0.5.1/go.mod h1:YOPVLzCfwK14b4Sff3oP1AmGhI9T9Vsg84etUnlyp+Q=
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc h1:U9qPSI2PIWSS1VwoXQT9A3Wy9MM3WgvqSxFWenqJduM=
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/go-resty/resty/v2 v2.16.2 h1:CpRqTjIzq/rweXUt9+GxzzQdlkqMdt8Lm/fuK/CAbAg=
@@ -32,6 +34,8 @@ github.com/yyle88/rese v0.0.2 h1:UdD5rc2DASd0RAJ322aptWX49keA7j/dvcJmVyreLqg=
 github.com/yyle88/rese v0.0.2/go.mod h1:wO23ottjYYp8U+8AFwlTbiHHpxpc9TFYXfjIcN/7szQ=
 github.com/yyle88/runpath v1.0.22 h1:gcyaNMNZq7yjL2Xlwvs0W7BOkzn4VJTJqA8ko7CKhKg=
 github.com/yyle88/runpath v1.0.22/go.mod h1:JRGxn/0Ytg6CvGoE2VrO74oX8Lu4jbOPZDKxr8tzPEg=
+github.com/yyle88/simplejsonx v0.0.6 h1:aCoe36tfetIpcSHSix6hiB/Wo6NULyOUd73UW2UXgrk=
+github.com/yyle88/simplejsonx v0.0.6/go.mod h1:XGIwJGyvBHr1mFBkwcjSGudSYH1sPjdB6FrjQ5Fjumc=
 github.com/yyle88/sure v0.0.34 h1:qKlH0RAvax0m6EcqcSfP8kctBHrkJFa1m7IpY6YqoBU=
 github.com/yyle88/sure v0.0.34/go.mod h1:QlR3RWsb+4+hw6it8qb7CTVk8lmhYO9RBWMJl/HWuio=
 github.com/yyle88/syntaxgo v0.0.43 h1:G5x7J0br8XvSxytAJJL/DQQ968HSoPBMyNTQ3NpBdII=
