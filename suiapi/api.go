@@ -62,7 +62,7 @@ func ExecuteTransactionBlock[RES any](ctx context.Context, serverUrl string, txB
 	return &response.Result, nil
 }
 
-func GetSomeSuiCoins(ctx context.Context, serverUrl string, address string) ([]*CoinType, error) {
+func GetSuiCoinsInTopPage(ctx context.Context, serverUrl string, address string) ([]*CoinType, error) {
 	// 构造 JSON-RPC 请求
 	request := &suirpc.RpcRequest{
 		Jsonrpc: "2.0",

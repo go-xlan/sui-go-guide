@@ -8,7 +8,7 @@
 
 ---
 
-# **Installing the Official Client**
+# **Installing the Sui Client**
 
 Install the SUI client on macOS using Homebrew:
 

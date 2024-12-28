@@ -81,7 +81,7 @@ func main() {
 }
 
 func chooseSuiCoin(ctx context.Context, serverUrl string, address string) *suiapi.CoinType {
-	suiCoins, err := suiapi.GetSomeSuiCoins(ctx, serverUrl, address)
+	suiCoins, err := suiapi.GetSuiCoinsInTopPage(ctx, serverUrl, address)
 	must.Done(err)
 
 	rand.Shuffle(len(suiCoins), func(i, j int) {

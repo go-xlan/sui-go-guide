@@ -33,3 +33,7 @@ type CoinMetadata struct {
 	Name        string `json:"name"`
 	Symbol      string `json:"symbol"`
 }
+
+type ValueMessage struct {
+	Value string `json:"value"`
+}
