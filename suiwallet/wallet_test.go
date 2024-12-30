@@ -6,6 +6,7 @@ import (
 
 	"github.com/go-xlan/sui-go-guide/suiwallet"
 	"github.com/stretchr/testify/require"
+	"github.com/yyle88/rese"
 )
 
 func TestNewWallet(t *testing.T) {
@@ -44,4 +45,15 @@ func caseNewWallet(t *testing.T, privateKeyHex string) string {
 
 	t.Logf("https://suiscan.xyz/testnet/account/%s", address)
 	return address
+}
+
+func TestWallet_Sign(t *testing.T) {
+	const privateKeyHex = "00375b3392d6463bb2d1a8e2ae66f1f83a388bc9ab4d4d0b8a378757350b37f7"
+	wallet := rese.P1(suiwallet.NewWalletV2(privateKeyHex))
+
+	message := "example"
+	signatureBytes, err := wallet.Sign([]byte(message))
+	require.NoError(t, err)
+	ok := wallet.Verify([]byte(message), signatureBytes)
+	require.True(t, ok)
 }
