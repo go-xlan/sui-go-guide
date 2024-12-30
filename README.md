@@ -22,7 +22,7 @@ After installation, check the SUI client version:
 sui --version
 ```
 
-Ensure the version matches the one mentioned in the official documentation, for example:
+Ensure the version matches the one mentioned in the sui documentation, for example:
 
 ```text
 sui 1.39.3-homebrew

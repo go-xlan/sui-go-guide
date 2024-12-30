@@ -1,10 +1,10 @@
 # SUI Smart Contract Development Guide
 
-## 1. Refer to the Official Documentation
+## 1. Refer to the SUI Documentation
 
-[Official Documentation - Start Writing a Contract](https://docs.sui.io/guides/developer/first-app)
+[SUI Documentation - Start Writing a Contract](https://docs.sui.io/guides/developer/first-app)
 
-Before you begin, verify that your SUI client version matches the one required by the official documentation:
+Before you begin, verify that your SUI client version matches the one required by the sui documentation:
 
 ```bash
 sui --version
@@ -22,7 +22,7 @@ Make sure your version matches to avoid potential issues.
 
 ## 2. How to Write a Contract
 
-[Official Documentation - Create a Contract Project](https://docs.sui.io/guides/developer/first-app/write-package)
+[SUI Documentation - Create a Contract Project](https://docs.sui.io/guides/developer/first-app/write-package)
 
 ### (1) Create a Contract Project
 
@@ -132,7 +132,7 @@ Once configured, the address for the `hello_blockchain` module is properly set.
 
 ## 3. Compile the Contract
 
-[Official Documentation - Build and Test a Contract](https://docs.sui.io/guides/developer/first-app/build-test)
+[SUI Documentation - Build and Test a Contract](https://docs.sui.io/guides/developer/first-app/build-test)
 
 Run the following command in the project root directory to compile the contract:
 
@@ -176,7 +176,7 @@ Test result: OK. Total tests: 3; passed: 3; failed: 0
 
 ## 5. Deploy the Contract
 
-[Official Documentation - Publish Your Contract](https://docs.sui.io/guides/developer/first-app/publish)
+[SUI Documentation - Publish Your Contract](https://docs.sui.io/guides/developer/first-app/publish)
 
 Run the following command to deploy the contract to the blockchain:
 
