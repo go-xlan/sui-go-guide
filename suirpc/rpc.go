@@ -54,7 +54,7 @@ func SendRpc[RES any](ctx context.Context, serverUrl string, request *RpcRequest
 		zaplog.SUG.Debugln("Response Raw:", neatjsons.SxB(response.Body()))
 	}
 	if resp.Error != nil {
-		return nil, erero.Wro(resp.Error.Error())
+		return nil, erero.Wro(resp.Error)
 	}
 	if debugModeOpen {
 		zaplog.SUG.Debugln("Response Msg:", neatjsons.S(resp))

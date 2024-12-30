@@ -1,6 +1,8 @@
 package suirpc
 
-import "github.com/yyle88/erero"
+import (
+	"fmt"
+)
 
 // RpcRequest represents a JSON-RPC request.
 type RpcRequest struct {
@@ -25,9 +27,7 @@ type RpcError struct {
 	Data    any    `json:"data,omitempty"`
 }
 
-func (rpe *RpcError) Error() error {
-	if rpe == nil {
-		return erero.New("unexpected logic")
-	}
-	return erero.Errorf("code=%d message=%s data=%v", rpe.Code, rpe.Message, rpe.Data)
+// Error implement the error interface{} to return wrong-reason
+func (rpcError *RpcError) Error() string {
+	return fmt.Sprintf("code=%d message=%s data=%v", rpcError.Code, rpcError.Message, rpcError.Data)
 }
