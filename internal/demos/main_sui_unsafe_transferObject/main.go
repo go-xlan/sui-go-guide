@@ -15,8 +15,6 @@ func main() {
 	const serverUrl = "https://fullnode.testnet.sui.io/"
 	// 发起交易的签名者地址
 	const address = "0x353a47f8fedca2d8cd1352222300f06b1f36789a55fffdecc6fe414ee1998969"
-	// 私钥信息
-	const privateKeyHex = "0e51bb6e96264505b7c36c71d6a7f8053ed73b20f6f4476fb4f7877b8934ae6b"
 	// 接收方地址
 	const recipient = "0x207ed5c0ad36b96c730ed0f71e3c26a0ffb59bc20ab21d08067ca4c035d4d062"
 	// 使用的 SUI 对象 ID
@@ -50,4 +48,7 @@ func main() {
 		fmt.Println(neatjsons.S(res))
 		must.Same(res.Effects.Status.Status, "success")
 	}
+
+	// next step: sign
+	// next step: send
 }
