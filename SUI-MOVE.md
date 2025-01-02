@@ -73,6 +73,31 @@ Example output:
 github.move             math.move               my_first_package.move
 ```
 
+Here's an example of the code inside the `my_first_package.move` module:
+
+```bash
+cat my_first_package.move
+```
+
+```move
+module my_first_package::my_first_package {
+
+    public fun say_hello(name: vector<u8>): vector<u8> {
+        let mut result = vector::empty<u8>();
+        vector::append(&mut result, b"hello ");
+        vector::append(&mut result, name);
+        result
+    }
+
+    #[test]
+    public fun test_say_hello() {
+        let result = say_hello(b"yyle88");
+        assert!(result == b"hello yyle88", 101);
+    }
+
+}
+```
+
 Here's an example of the code inside the `math.move` module:
 
 ```bash
@@ -169,7 +194,8 @@ Running Move unit tests
 [ PASS    ] hello_blockchain::math::test_add
 [ PASS    ] hello_blockchain::github::test_page
 [ PASS    ] hello_blockchain::github::test_page_sui_go_guide
-Test result: OK. Total tests: 3; passed: 3; failed: 0
+[ PASS    ] my_first_package::my_first_package::test_say_hello
+Test result: OK. Total tests: 4; passed: 4; failed: 0
 ```
 
 ---
@@ -192,7 +218,7 @@ INCLUDING DEPENDENCY Sui
 INCLUDING DEPENDENCY MoveStdlib
 BUILDING my_first_package
 Successfully verified dependencies on-chain against source.
-Transaction Digest: Af7PVu3R3GQsTszsRFfdNjYrLGLZcyioaksHLVDmmKXJ
+Transaction Digest: HXQT2cv15bABW87o6KUSJxbYuHVHCYGHefWpafLnsC4P
 ```
 
 ---
@@ -202,6 +228,7 @@ Transaction Digest: Af7PVu3R3GQsTszsRFfdNjYrLGLZcyioaksHLVDmmKXJ
 After deployment, the `Transaction Digest` serves as the unique transaction hash (similar to `txid` or `txHash`). You can use it to check the deployment status on a blockchain explorer:
 
 [Example Deployment Result](https://suiscan.xyz/testnet/tx/Af7PVu3R3GQsTszsRFfdNjYrLGLZcyioaksHLVDmmKXJ)
+[Example Deployment Result](https://suiscan.xyz/testnet/tx/HXQT2cv15bABW87o6KUSJxbYuHVHCYGHefWpafLnsC4P)
 
 **Note**: Avoid deploying the same contract multiple times unnecessarily, as each deployment creates a new contract instance.
 

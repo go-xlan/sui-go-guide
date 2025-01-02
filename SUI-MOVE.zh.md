@@ -73,6 +73,31 @@ ls
 github.move             math.move               my_first_package.move
 ```
 
+其中 `my_first_package.move` 的示例代码如下：
+
+```bash
+cat my_first_package.move
+```
+
+```move
+module my_first_package::my_first_package {
+
+    public fun say_hello(name: vector<u8>): vector<u8> {
+        let mut result = vector::empty<u8>();
+        vector::append(&mut result, b"hello ");
+        vector::append(&mut result, name);
+        result
+    }
+
+    #[test]
+    public fun test_say_hello() {
+        let result = say_hello(b"yyle88");
+        assert!(result == b"hello yyle88", 101);
+    }
+
+}
+```
+
 其中 `math.move` 的示例代码如下：
 
 ```bash
@@ -169,7 +194,8 @@ Running Move unit tests
 [ PASS    ] hello_blockchain::math::test_add
 [ PASS    ] hello_blockchain::github::test_page
 [ PASS    ] hello_blockchain::github::test_page_sui_go_guide
-Test result: OK. Total tests: 3; passed: 3; failed: 0
+[ PASS    ] my_first_package::my_first_package::test_say_hello
+Test result: OK. Total tests: 4; passed: 4; failed: 0
 ```
 
 ---
@@ -192,7 +218,7 @@ INCLUDING DEPENDENCY Sui
 INCLUDING DEPENDENCY MoveStdlib
 BUILDING my_first_package
 Successfully verified dependencies on-chain against source.
-Transaction Digest: Af7PVu3R3GQsTszsRFfdNjYrLGLZcyioaksHLVDmmKXJ
+Transaction Digest: HXQT2cv15bABW87o6KUSJxbYuHVHCYGHefWpafLnsC4P
 ```
 
 ---
@@ -202,6 +228,7 @@ Transaction Digest: Af7PVu3R3GQsTszsRFfdNjYrLGLZcyioaksHLVDmmKXJ
 部署成功后，`Transaction Digest` 就是本次发布的交易哈希（类似 `txid` 或 `txHash`）。你可以通过区块链浏览器查询发布结果：
 
 [示例查询结果](https://suiscan.xyz/testnet/tx/Af7PVu3R3GQsTszsRFfdNjYrLGLZcyioaksHLVDmmKXJ)
+[示例查询结果](https://suiscan.xyz/testnet/tx/HXQT2cv15bABW87o6KUSJxbYuHVHCYGHefWpafLnsC4P)
 
 **注意**：请避免多次重复发布，否则每次都会生成一个新的合约实例。
 
