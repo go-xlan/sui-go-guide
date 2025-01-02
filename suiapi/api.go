@@ -36,6 +36,11 @@ func ExecuteTransactionBlock[RES any](ctx context.Context, serverUrl string, txB
 	}
 
 	// 构造模拟调用的 JSON RPC 请求
+	// 如果没有显式设置 request_type 参数，那么默认的请求类型会是 WaitForEffectsCert。
+	// 但是，如果选项 options.show_events 或 options.show_effects 被设置为 true，则会自动切换为 WaitForLocalExecution 模式。
+	// 这里通过显式指定 WaitForLocalExecution 的模式，避免服务端推导，也避免开发者推导。
+	// 当配置与约束不一致的时候，请求会报错。
+	// 因此建议始终配置，而不是使用默认值。
 	request := &suirpc.RpcRequest{
 		Jsonrpc: "2.0",
 		Method:  "sui_executeTransactionBlock",
@@ -51,7 +56,7 @@ func ExecuteTransactionBlock[RES any](ctx context.Context, serverUrl string, txB
 				ShowBalanceChanges: true,
 				ShowRawEffects:     true,
 			},
-			"WaitForLocalExecution",
+			"WaitForLocalExecution", // WaitForLocalExecution = TransactionEffectsCert + 确认已经执行
 		},
 		ID: 1,
 	}
