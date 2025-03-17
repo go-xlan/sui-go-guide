@@ -1,6 +1,7 @@
 package suiwallet_test
 
 import (
+	"crypto/rand"
 	"encoding/hex"
 	"testing"
 
@@ -10,6 +11,17 @@ import (
 )
 
 func TestNewWallet(t *testing.T) {
+	hexOutput := make([]byte, 32) // 32 bytes = 64 hex characters
+	rese.C1(rand.Read(hexOutput))
+	hexString := hex.EncodeToString(hexOutput)
+	t.Log("random-private-key-hex:", hexString)
+	require.Len(t, hexString, 64)
+
+	address := caseNewWallet(t, hexString)
+	t.Log("address:", address)
+}
+
+func TestNewWallet_1(t *testing.T) {
 	const privateKeyHex = "e4c450f61ba740ae8cc1af0b0fb6a135012747b302154410ad635bde12b411c9"
 
 	address := caseNewWallet(t, privateKeyHex)
