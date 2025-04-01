@@ -60,6 +60,7 @@ func main() {
 	rpcResponse, err := suirpc.SendRpc[suiapi.TxBytesMessage](context.Background(), serverUrl, request)
 	must.Done(err)
 	txBytes := rpcResponse.Result.TxBytes
+	fmt.Println("raw-transaction:", txBytes)
 
 	{
 		res, err := suiapi.DryRunTransactionBlock[suiapi.EffectsStatusStatusMessage](context.Background(), serverUrl, txBytes)
@@ -70,7 +71,7 @@ func main() {
 
 	signatures, err := suisigntx.Sign(privateKeyHex, txBytes)
 	must.Done(err)
-	fmt.Println("signatures", signatures)
+	fmt.Println("signatures:", signatures)
 
 	res, err := suiapi.ExecuteTransactionBlock[suiapi.DigestMessage](context.Background(), serverUrl, txBytes, signatures)
 	must.Done(err)

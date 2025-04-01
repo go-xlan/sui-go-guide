@@ -11,13 +11,13 @@ import (
 )
 
 func TestNewWallet(t *testing.T) {
-	hexOutput := make([]byte, 32) // 32 bytes = 64 hex characters
-	rese.C1(rand.Read(hexOutput))
-	hexString := hex.EncodeToString(hexOutput)
-	t.Log("random-private-key-hex:", hexString)
-	require.Len(t, hexString, 64)
+	output := make([]byte, 32) // 32 bytes = 64 hex characters
+	rese.C1(rand.Read(output))
+	prkHex := hex.EncodeToString(output)
+	t.Log("random-private-key-hex:", prkHex)
+	require.Len(t, prkHex, 64)
 
-	address := caseNewWallet(t, hexString)
+	address := caseNewWallet(t, prkHex)
 	t.Log("address:", address)
 }
 
@@ -43,10 +43,7 @@ func TestNewWallet_3(t *testing.T) {
 }
 
 func caseNewWallet(t *testing.T, privateKeyHex string) string {
-	privateKey, err := hex.DecodeString(privateKeyHex)
-	require.NoError(t, err)
-
-	wallet, err := suiwallet.NewWallet(privateKey)
+	wallet, err := suiwallet.NewWalletV2(privateKeyHex)
 	require.NoError(t, err)
 
 	publicKeyHex := hex.EncodeToString(wallet.Public())
