@@ -28,7 +28,7 @@ func main() {
 
 	must.Have(checkpointResult.Transactions)
 
-	var transactionDigests []string = checkpointResult.Transactions
+	var transactionDigests = checkpointResult.Transactions
 
 	// 构造 JSON-RPC 请求
 	request := &suirpc.RpcRequest{
