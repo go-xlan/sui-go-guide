@@ -13,10 +13,13 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/yyle88/eroticgo"
 	"github.com/yyle88/must"
+	"github.com/yyle88/must/muststrings"
 	"github.com/yyle88/neatjson"
 	"github.com/yyle88/osexec"
 	"github.com/yyle88/rese"
 )
+
+const defaultSchema = "ed25519"
 
 func main() {
 	var rootCmd = &cobra.Command{
@@ -27,8 +30,8 @@ func main() {
 
 	// 添加子命令
 	rootCmd.AddCommand(createWalletCommand())
-	rootCmd.AddCommand(convertKeysCommand())
-	rootCmd.AddCommand(convertKeyCommand())
+	rootCmd.AddCommand(convertAllKeysCommand())
+	rootCmd.AddCommand(convertKeyOnceCommand())
 	rootCmd.AddCommand(signCommand())
 
 	// 执行命令
@@ -45,23 +48,23 @@ func createWalletCommand() *cobra.Command {
 			output := make([]byte, 32) // 32 bytes = 64 hex characters
 			rese.C1(rand.Read(output))
 			privateKeyHex := hex.EncodeToString(output)
-			showWallet(privateKeyHex)
+			newWallet(privateKeyHex)
 		},
 	}
 	return cmd
 }
 
-func showWallet(privateKeyHex string) {
+func newWallet(privateKeyHex string) {
 	fmt.Println(eroticgo.BLUE.Sprint("----"))
-	fmt.Println(eroticgo.RED.Sprint("random-private-key-hex:"), privateKeyHex)
-	must.Same(len(privateKeyHex), 64)
+	fmt.Println(eroticgo.CYAN.Sprint("RANDOM-PRIVATE:"), privateKeyHex)
+	muststrings.Length(privateKeyHex, 64)
 	wallet := rese.P1(suiwallet.NewWalletV2(privateKeyHex))
-	fmt.Println(eroticgo.BLUE.Sprint("public-key-hex:"), hex.EncodeToString(wallet.Public()))
-	fmt.Println(eroticgo.GREEN.Sprint("wallet-address:"), wallet.Address())
+	fmt.Println(eroticgo.BLUE.Sprint("PUBLIC-KEY-HEX:"), hex.EncodeToString(wallet.Public()))
+	fmt.Println(eroticgo.PINK.Sprint("WALLET-ADDRESS:"), wallet.Address())
 	fmt.Println(eroticgo.BLUE.Sprint("----"))
 }
 
-func convertKeysCommand() *cobra.Command {
+func convertAllKeysCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "convert-keys",
 		Short: "Convert private keys from sui.keystore",
@@ -77,17 +80,17 @@ func convertKeysCommand() *cobra.Command {
 
 			fmt.Println(neatjson.SP2.Soft().S(keys))
 
-			for idx, suiKeyCiphertext := range keys {
+			for idx, suiKey := range keys {
 				fmt.Println(eroticgo.BLUE.Sprint("----------------"))
-				fmt.Println(fmt.Sprintf("(%d/%d)", idx, len(keys)), suiKeyCiphertext)
+				fmt.Println(fmt.Sprintf("(%d/%d)", idx, len(keys)), suiKey)
 				fmt.Println(eroticgo.BLUE.Sprint("----------------"))
-				result := convertSuiKeyCiphertext(suiKeyCiphertext, true)
+				result := parseSuiKeyInfo(suiKey, true)
 
-				if result.Scheme != "ed25519" {
+				if result.Scheme != defaultSchema {
 					continue
 				}
 
-				showWallet(result.HexWithoutFlag)
+				newWallet(result.HexWithoutFlag)
 				fmt.Println(eroticgo.BLUE.Sprint("----------------"))
 			}
 		},
@@ -95,24 +98,29 @@ func convertKeysCommand() *cobra.Command {
 	return cmd
 }
 
-type convertSuiKeyCiphertextResultType struct {
+type suiKeyType struct {
 	Bech32WithFlag string `json:"bech32WithFlag"`
 	Base64WithFlag string `json:"base64WithFlag"`
 	HexWithoutFlag string `json:"hexWithoutFlag"`
 	Scheme         string `json:"scheme"`
 }
 
-func convertSuiKeyCiphertext(suiKeyCiphertext string, debugMode bool) *convertSuiKeyCiphertextResultType {
+func parseSuiKeyInfo(suiKey string, debugMode bool) *suiKeyType {
 	if debugMode {
-		output := rese.A1(osexec.Exec("sui", "keytool", "convert", suiKeyCiphertext))
+		output := rese.A1(osexec.Exec("sui", "--version"))
+		fmt.Println("sui --version")
+		fmt.Println(eroticgo.PINK.Sprint("VERSION-OUTPUT:"), string(output))
+	}
+	if debugMode {
+		output := rese.A1(osexec.Exec("sui", "keytool", "convert", suiKey))
 		fmt.Println(string(output))
 	}
-	output := rese.A1(osexec.Exec("sui", "keytool", "convert", suiKeyCiphertext, "--json"))
+	output := rese.A1(osexec.Exec("sui", "keytool", "convert", suiKey, "--json"))
 	if debugMode {
 		fmt.Println(string(output))
 	}
 
-	var result = &convertSuiKeyCiphertextResultType{}
+	var result = &suiKeyType{}
 	must.Done(json.Unmarshal(output, result))
 	must.Nice(result.Scheme)
 	must.Nice(result.HexWithoutFlag)
@@ -122,22 +130,22 @@ func convertSuiKeyCiphertext(suiKeyCiphertext string, debugMode bool) *convertSu
 	return result
 }
 
-func convertKeyCommand() *cobra.Command {
+func convertKeyOnceCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "convert",
 		Short: "Convert private key from one of key in sui.keystore",
 		Long:  `Convert private key from one of key in sui.keystore with (sui keytool convert [VALUE])`,
 		Run: func(cmd *cobra.Command, args []string) {
-			suiKeyCiphertext := rese.C1(cmd.Flags().GetString("sui_key"))
+			suiKey := rese.C1(cmd.Flags().GetString("sui_key"))
 
 			fmt.Println(eroticgo.BLUE.Sprint("----------------"))
-			result := convertSuiKeyCiphertext(suiKeyCiphertext, true)
+			result := parseSuiKeyInfo(suiKey, true)
 
-			if result.Scheme != "ed25519" {
+			if result.Scheme != defaultSchema {
 				return
 			}
 
-			showWallet(result.HexWithoutFlag)
+			newWallet(result.HexWithoutFlag)
 			fmt.Println(eroticgo.BLUE.Sprint("----------------"))
 		},
 	}
@@ -165,10 +173,10 @@ func signCommand() *cobra.Command {
 			must.Done(json.Unmarshal(content, &keys))
 			must.Have(keys)
 
-			for _, suiKeyCiphertext := range keys {
-				result := convertSuiKeyCiphertext(suiKeyCiphertext, false)
+			for _, suiKey := range keys {
+				result := parseSuiKeyInfo(suiKey, false)
 
-				if result.Scheme != "ed25519" {
+				if result.Scheme != defaultSchema {
 					continue
 				}
 
