@@ -30,9 +30,13 @@ func main() {
 
 	// 添加子命令
 	rootCmd.AddCommand(createWalletCommand())
-	rootCmd.AddCommand(convertAllKeysCommand())
-	rootCmd.AddCommand(convertKeyOnceCommand())
-	rootCmd.AddCommand(signCommand())
+
+	// 这些暂时不要开启，因为这些是要读私钥的，实践中发现读私钥还是不安全的。开发者确实需要打开的，您可以克隆项目然后本地修改和编译
+	if false {
+		rootCmd.AddCommand(convertAllKeysCommand())
+		rootCmd.AddCommand(convertKeyOnceCommand())
+		rootCmd.AddCommand(signCommand())
+	}
 
 	// 执行命令
 	must.Done(rootCmd.Execute())

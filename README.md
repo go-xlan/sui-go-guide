@@ -1,10 +1,22 @@
+<p align="center">
+  <img 
+    alt="wojack-cartoon logo" 
+    src="assets/wojack-cartoon.jpeg" 
+    style="max-height: 500px; width: auto; max-width: 100%;" 
+  />
+</p>
+<h3 align="center">golang-SUI</h3>
+<p align="center">create/sign <code>SUI transaction</code> with golang</p>
+
+---
+
 ### SUI-Go-Guide: SUI Chain Study and Usage Guide
 
 ---
 
 ## **README**
 
-[Chinese Documentation (中文文档)](README.zh.md)
+[CHINESE-DOCUMENTATION (中文文档)](README.zh.md)
 
 ---
 
@@ -204,7 +216,24 @@ This project exists solely for the purpose of technical learning and exploration
 
 ## License
 
-`sui-go-guide` is open-source and released under the MIT License. See the [LICENSE](LICENSE) file for more information.
+MIT License. See [LICENSE](LICENSE).
+
+---
+
+## Contributing
+
+Contributions are welcome! To contribute:
+
+1. Fork the repo on GitHub (using the webpage interface).
+2. Clone the forked project (`git clone https://github.com/yourname/repo-name.git`).
+3. Navigate to the cloned project (`cd repo-name`)
+4. Create a feature branch (`git checkout -b feature/xxx`).
+5. Stage changes (`git add .`)
+6. Commit changes (`git commit -m "Add feature xxx"`).
+7. Push to the branch (`git push origin feature/xxx`).
+8. Open a pull request on GitHub (on the GitHub webpage).
+
+Please ensure tests pass and include relevant documentation updates.
 
 ---
 
@@ -212,7 +241,7 @@ This project exists solely for the purpose of technical learning and exploration
 
 Welcome to contribute to this project by submitting pull requests or reporting issues.
 
-If you find this package helpful, give it a star on GitHub!
+If you find this package valuable, give me some stars on GitHub! Thank you!!!
 
 **Thank you for your support!**
 
