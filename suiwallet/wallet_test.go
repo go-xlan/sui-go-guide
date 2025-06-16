@@ -2,6 +2,7 @@ package suiwallet_test
 
 import (
 	"crypto/rand"
+	"encoding/base64"
 	"encoding/hex"
 	"testing"
 
@@ -47,7 +48,10 @@ func caseNewWallet(t *testing.T, privateKeyHex string) string {
 	require.NoError(t, err)
 
 	publicKeyHex := hex.EncodeToString(wallet.Public())
-	t.Log("publicKey:", publicKeyHex)
+	t.Log("publicKeyHex:", publicKeyHex)
+
+	publicKeyBase64 := base64.StdEncoding.EncodeToString(wallet.Public())
+	t.Log("publicKeyBase64:", publicKeyBase64)
 
 	address := wallet.Address()
 	t.Log("address:", address)

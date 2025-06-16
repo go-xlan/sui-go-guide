@@ -177,10 +177,10 @@ Sample output:
 }
 ```
 
-- `hexWithoutFlag` is the actual private key.
+- `hexWithoutFlag` is the actual private key in hex style.
 - `scheme` represents the wallet's protocol format (`ed25519` in this case).
 
-With the `hexWithoutFlag`, you can perform tasks like signing transactions programmatically.
+With the `hexWithoutFlag`, you can perform tasks like signing transactions.
 
 ---
 
@@ -239,12 +239,18 @@ Please ensure tests pass and include relevant documentation updates.
 
 ## Support
 
-Welcome to contribute to this project by submitting pull requests or reporting issues.
+Welcome to contribute to this project by submitting pull requests and reporting issues.
 
 If you find this package valuable, give me some stars on GitHub! Thank you!!!
 
 **Thank you for your support!**
 
-**Happy Coding with `sui-go-guide`!** 🎉
+**Happy Coding with this package!** 🎉
 
 Give me stars. Thank you!!!
+
+---
+
+## GitHub Stars
+
+[![starring](https://starchart.cc/go-xlan/sui-go-guide.svg?variant=adaptive)](https://starchart.cc/go-xlan/sui-go-guide)
