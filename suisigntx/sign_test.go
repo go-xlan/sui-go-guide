@@ -7,6 +7,15 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+// TestSign tests transaction signature generation with known data
+// Uses fixed transaction bytes and private key to generate signature
+// Validates signature matches expected Base64-encoded output
+// Verifies complete signature workflow with scheme flag and public key
+//
+// TestSign 测试使用已知数据生成交易签名
+// 使用固定的交易字节和私钥生成签名
+// 验证签名与预期的 Base64 编码输出匹配
+// 验证包含方案标志和公钥的完整签名工作流
 func TestSign(t *testing.T) {
 	// 交易数据
 	const txBytes = "AAACACAgftXArTa5bHMO0PcePCag/7WbwgqyHQgGfKTANdTQYgAIQEIPAAAAAAACAgABAQEAAQECAAABAAA1Okf4/tyi2M0TUiIjAPBrHzZ4mlX//ezG/kFO4ZmJaQH8Rmha6Ik6pkfBUfWB5gqFScyyQGhbWFzbzzQ8S/02yeKFQhEAAAAAIEvQWQTe7kYt5FMQiPWNx3v5vhWc2K7VivFfeaJP/4YnNTpH+P7cotjNE1IiIwDwax82eJpV//3sxv5BTuGZiWnoAwAAAAAAAICWmAAAAAAAAA=="

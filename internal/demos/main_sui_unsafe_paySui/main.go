@@ -1,3 +1,12 @@
+// Package main: Demo application to send SUI tokens to multiple recipients
+// Demonstrates unsafe_paySui RPC method with batch payment
+// Shows how to transfer different amounts to multiple addresses at once
+// Includes multiple input coins and recipient management
+//
+// main: 向多个接收者发送 SUI 代币的演示应用程序
+// 演示批量支付的 unsafe_paySui RPC 方法
+// 展示如何一次性向多个地址转账不同金额
+// 包括多个输入代币和接收者管理
 package main
 
 import (

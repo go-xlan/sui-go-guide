@@ -1,3 +1,12 @@
+// Package main: Demo application to send all SUI tokens from multiple coins to recipient
+// Demonstrates unsafe_payAllSui RPC method with coin consolidation
+// Shows how to transfer entire balance from multiple coins in one transaction
+// Includes transaction simulation and coin query
+//
+// main: 从多个代币向接收者发送所有 SUI 代币的演示应用程序
+// 演示带有代币合并的 unsafe_payAllSui RPC 方法
+// 展示如何在一次交易中从多个代币转移全部余额
+// 包括交易模拟和代币查询
 package main
 
 import (

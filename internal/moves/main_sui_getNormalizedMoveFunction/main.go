@@ -1,3 +1,12 @@
+// Package main: Demo application to query Move function metadata from blockchain
+// Demonstrates sui_getNormalizedMoveFunction RPC method with contract introspection
+// Shows how to retrieve function signature and parameter information
+// Prints function metadata in JSON format from testnet
+//
+// main: 从区块链查询 Move 函数元数据的演示应用程序
+// 演示带有合约自省的 sui_getNormalizedMoveFunction RPC 方法
+// 展示如何检索函数签名和参数信息
+// 从测试网以 JSON 格式打印函数元数据
 package main
 
 import (

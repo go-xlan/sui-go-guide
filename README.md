@@ -1,26 +1,178 @@
+[![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/go-xlan/sui-go-guide/release.yml?branch=main&label=BUILD)](https://github.com/go-xlan/sui-go-guide/actions/workflows/release.yml?query=branch%3Amain)
+[![GoDoc](https://pkg.go.dev/badge/github.com/go-xlan/sui-go-guide)](https://pkg.go.dev/github.com/go-xlan/sui-go-guide)
+[![Coverage Status](https://img.shields.io/coveralls/github/go-xlan/sui-go-guide/main.svg)](https://coveralls.io/github/go-xlan/sui-go-guide?branch=main)
+[![Supported Go Versions](https://img.shields.io/badge/Go-1.22--1.25-lightgrey.svg)](https://github.com/go-xlan/sui-go-guide)
+[![GitHub Release](https://img.shields.io/github/release/go-xlan/sui-go-guide.svg)](https://github.com/go-xlan/sui-go-guide/releases)
+[![Go Report Card](https://goreportcard.com/badge/github.com/go-xlan/sui-go-guide)](https://goreportcard.com/report/github.com/go-xlan/sui-go-guide)
+
 <p align="center">
-  <img 
-    alt="wojack-cartoon logo" 
-    src="assets/wojack-cartoon.jpeg" 
-    style="max-height: 500px; width: auto; max-width: 100%;" 
+  <img
+    alt="wojack-cartoon logo"
+    src="assets/wojack-cartoon.jpeg"
+    style="max-height: 500px; width: auto; max-width: 100%;"
   />
 </p>
 <h3 align="center">golang-SUI</h3>
 <p align="center">create/sign <code>SUI transaction</code> with golang</p>
 
----
+# sui-go-guide
 
-### SUI-Go-Guide: SUI Chain Study and Usage Guide
-
----
-
-## **README**
-
-[CHINESE-DOCUMENTATION (中文文档)](README.zh.md)
+Comprehensive Go SDK and tutorial collection to interact with the SUI blockchain.
 
 ---
 
-# **Installing the Sui Client**
+<!-- TEMPLATE (EN) BEGIN: LANGUAGE NAVIGATION -->
+## CHINESE README
+
+[中文说明](README.zh.md)
+<!-- TEMPLATE (EN) END: LANGUAGE NAVIGATION -->
+
+## Overview
+
+**sui-go-guide** is a complete Go SDK and tutorial collection enabling seamless interaction with the SUI blockchain. The package provides pure Go implementations, removing external CLI dependencies and simplifying blockchain integration.
+
+### Key Features
+
+- 🚀 **Pure Go Implementation** - No external CLI dependencies needed
+- 🔐 **Complete Wallet Management** - Create, import, and manage SUI wallets
+- 📝 **Transaction Signing** - Sign transactions with Ed25519 cryptographic functions
+- 🔄 **RPC Client** - Type-safe JSON-RPC communication with SUI nodes
+- 📦 **Key Conversion** - Replace `sui keytool convert` with pure Go code
+- 📚 **Rich Examples** - 25+ demo apps covering common use cases
+
+---
+
+## Features
+
+- ✅ **Wallet Operations**
+  - Generate new wallets with Ed25519 keys
+  - Import existing wallets from private keys
+  - Derive addresses using Blake2b-256 hashing
+
+- ✅ **Transaction Management**
+  - Build and sign transactions
+  - Simulate transactions before execution
+  - Execute transactions on mainnet/testnet/devnet
+
+- ✅ **Key Conversion**
+  - Pure Go implementation of `sui keytool convert`
+  - Decode Base64 keystore keys
+  - Encode private keys to keystore format
+
+- ✅ **RPC Operations**
+  - Query coin balances and metadata
+  - Retrieve transaction history
+  - Call Move smart contracts
+  - Get checkpoint information
+
+- ✅ **Move Contract Interaction**
+  - Call Move functions with parameters
+  - Query normalized Move function signatures
+  - Handle type parameters and complex calls
+
+---
+
+## Quick Start
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "github.com/go-xlan/sui-go-guide/suisecret"
+    "github.com/go-xlan/sui-go-guide/suiwallet"
+    "github.com/go-xlan/sui-go-guide/suiapi"
+)
+
+func main() {
+    // Decode keystore key (replaces: sui keytool convert)
+    keyInfo, _ := suisecret.Decode("AN81Pxp9PFqCh0SlRMTkfDOP0cSm7U/MxsJiqsWL0KF+")
+
+    // Create wallet from decoded key
+    wallet, _ := keyInfo.GetWallet()
+    fmt.Println("Address:", wallet.Address())
+
+    // Query coin balance
+    coins, _ := suiapi.GetSuiCoinsInTopPage(
+        context.Background(),
+        "https://fullnode.mainnet.sui.io/",
+        wallet.Address(),
+    )
+    fmt.Printf("Found %d coins\n", len(coins))
+}
+```
+
+---
+
+## Installation
+
+Install the library in your Go project:
+
+```bash
+go get github.com/go-xlan/sui-go-guide
+```
+
+### Prerequisites
+
+For complete functionality, install the SUI CLI (optional):
+
+```bash
+# macOS
+brew install sui
+
+# Verify installation
+sui --version
+```
+
+---
+
+## Examples
+
+The repository includes 25+ demo applications covering common use cases:
+
+- [Basic demos](internal/demos) - Wallet operations, transactions, RPC calls
+- [Move contracts](internal/moves) - Smart contract interaction examples
+
+### Example: Convert Keystore Key
+
+```go
+import "github.com/go-xlan/sui-go-guide/suisecret"
+
+// Pure Go implementation - replaces: sui keytool convert
+keyInfo, err := suisecret.Decode("AAHPc6DmM3+2BWLP/CR/cLLoTtB4SN3o8Z3RNEqmUnuh")
+fmt.Println("Private Key:", keyInfo.HexWithoutFlag)
+fmt.Println("Scheme:", keyInfo.Scheme)
+```
+
+### Example: Create New Wallet
+
+```go
+import "github.com/go-xlan/sui-go-guide/suiwallet"
+
+// Generate new wallet with random private key
+wallet, err := suiwallet.NewWallet()
+fmt.Println("Address:", wallet.Address())
+fmt.Println("Private Key:", wallet.PrivateKeyHex())
+```
+
+### Example: Query Coin Balance
+
+```go
+import "github.com/go-xlan/sui-go-guide/suiapi"
+
+coins, err := suiapi.GetSuiCoinsInTopPage(
+    context.Background(),
+    "https://fullnode.mainnet.sui.io/",
+    "0x...", // wallet address
+)
+```
+
+---
+
+## SUI CLI Setup Guide
+
+### Installing the Sui Client
 
 Install the SUI client on macOS using Homebrew:
 
@@ -44,7 +196,7 @@ By default, the SUI client connects to the Mainnet. To switch to other networks,
 
 ---
 
-## **Switching Networks**
+### Switching Networks
 
 To switch to the Devnet:
 
@@ -64,7 +216,7 @@ However, you may encounter an error stating the development environment configur
 Environment config not found for [Some("devnet")], add new environment config using the `sui client new-env` command.
 ```
 
-You can skip this step and switch directly to the Testnet:
+You can skip this step and switch to the Testnet:
 
 ```bash
 sui client switch --env testnet
@@ -78,7 +230,7 @@ Active environment switched to [testnet]
 
 ---
 
-## **Creating a Wallet Address**
+### Creating a Wallet Address
 
 Generate a new wallet address with the following command:
 
@@ -125,7 +277,7 @@ Active address switched to 0x207ed5c0ad36b96c730ed0f71e3c26a0ffb59bc20ab21d08067
 
 ---
 
-## **Claiming Test Tokens**
+### Claiming Test Tokens
 
 Claim test tokens (Test Coin) for your wallet:
 
@@ -154,7 +306,7 @@ Faucet request was unsuccessful: 502 Bad Gateway
 
 ---
 
-## **Viewing the Private Key**
+### Viewing the Private Key
 
 The private key file is stored in the following directory:
 
@@ -177,80 +329,114 @@ Sample output:
 }
 ```
 
-- `hexWithoutFlag` is the actual private key in hex style.
+- `hexWithoutFlag` is the actual private key in hex format.
 - `scheme` represents the wallet's protocol format (`ed25519` in this case).
 
 With the `hexWithoutFlag`, you can perform tasks like signing transactions.
 
 ---
 
-## **Code Examples**
+## Code Examples
 
 Code examples: [internal/demos](internal/demos)
 
 ---
 
-## **Contract Guide**
+## Key Conversion Package
 
-[Contract Guide](SUI-MOVE.md)
+The `suisecret` package provides a pure Go implementation to convert SUI keystore keys without external dependencies:
+
+```go
+import "github.com/go-xlan/sui-go-guide/suisecret"
+
+keyInfo, err := suisecret.Decode(suiKey)
+// Replaces: sui keytool convert
+```
+
+---
+
+## Contract Development
+
+For Move smart contract development guide, see [SUI-MOVE.md](SUI-MOVE.md)
 
 ---
 
 ## DISCLAIMER
 
-Crypto coin, at its core, is nothing but a scam. It thrives on the concept of "air coins"—valueless digital assets—to exploit the hard-earned wealth of ordinary people, all under the guise of innovation and progress. This ecosystem is inherently devoid of fairness or justice.
+Crypto coin, at its core, is nothing but a scam. It thrives on the concept of "air coins"—valueless digital assets—to exploit the hard-earned wealth of common people, all under the guise of innovation and advancement. This ecosystem is devoid of fairness and justice.
 
-For the elderly, cryptocurrencies present significant challenges and risks. The so-called "high-tech" façade often excludes them from understanding or engaging with these tools. Instead, they become easy targets for financial exploitation, stripped of the resources they worked a lifetime to accumulate.
+That cryptocurrencies like BTC, ETH, or TRX could replace global fiat currencies is nothing but a pipe dream. This notion exists as the fantasy of those from the 1980s generation who hoarded amounts of crypto coin before the public had a chance to participate.
 
-The younger generation faces a different but equally insidious issue. By the time they have the opportunity to engage, the early adopters have already hoarded the lion’s share of resources. The system is inherently tilted, offering little chance for new entrants to gain a fair footing.
+Ask this: would someone holding thousands, or tens of thousands, of Bitcoin believe the system is fair? The answer is no. These systems were not designed with fairness in mind but to entrench the advantages of a select few.
 
-The idea that cryptocurrencies like BTC, ETH, or TRX could replace global fiat currencies is nothing more than a pipe dream. This notion serves only as the shameless fantasy of early adopters, particularly those from the 1980s generation, who hoarded significant amounts of crypto coin before the general public even had an opportunity to participate.
+The rise of cryptocurrencies is not the endgame. It is inevitable that new innovations will emerge, replacing these flawed systems. At this moment, interest lies in understanding the technical aspects—nothing more, nothing less.
 
-Ask yourself this: would someone holding thousands, or even tens of thousands, of Bitcoin ever genuinely believe the system is fair? The answer is unequivocally no. These systems were never designed with fairness in mind but rather to entrench the advantages of a select few.
-
-The rise of cryptocurrencies is not the endgame. It is inevitable that new innovations will emerge, replacing these deeply flawed systems. At this moment, my interest lies purely in understanding the underlying technology—nothing more, nothing less.
-
-This project exists solely for the purpose of technical learning and exploration. The author of this project maintains a firm and unequivocal stance of *staunch resistance to cryptocurrencies*.
+This project exists to support technical education and exploration. The author of this project maintains a firm stance of *staunch resistance to cryptocurrencies*.
 
 ---
 
-## License
+<!-- TEMPLATE (EN) BEGIN: STANDARD PROJECT FOOTER -->
+<!-- VERSION 2025-09-26 07:39:27.188023 +0000 UTC -->
+
+## 📄 License
 
 MIT License. See [LICENSE](LICENSE).
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
-Contributions are welcome! To contribute:
+Contributions are welcome! Report bugs, suggest features, and contribute code:
 
-1. Fork the repo on GitHub (using the webpage interface).
-2. Clone the forked project (`git clone https://github.com/yourname/repo-name.git`).
-3. Navigate to the cloned project (`cd repo-name`)
-4. Create a feature branch (`git checkout -b feature/xxx`).
-5. Stage changes (`git add .`)
-6. Commit changes (`git commit -m "Add feature xxx"`).
-7. Push to the branch (`git push origin feature/xxx`).
-8. Open a pull request on GitHub (on the GitHub webpage).
+- 🐛 **Found a mistake?** Open an issue on GitHub with reproduction steps
+- 💡 **Have a feature idea?** Create an issue to discuss the suggestion
+- 📖 **Documentation confusing?** Report it so we can improve
+- 🚀 **Need new features?** Share the use cases to help us understand requirements
+- ⚡ **Performance issue?** Help us optimize through reporting slow operations
+- 🔧 **Configuration problem?** Ask questions about complex setups
+- 📢 **Follow project progress?** Watch the repo to get new releases and features
+- 🌟 **Success stories?** Share how this package improved the workflow
+- 💬 **Feedback?** We welcome suggestions and comments
+
+---
+
+## 🔧 Development
+
+New code contributions, follow this process:
+
+1. **Fork**: Fork the repo on GitHub (using the webpage UI).
+2. **Clone**: Clone the forked project (`git clone https://github.com/yourname/repo-name.git`).
+3. **Navigate**: Navigate to the cloned project (`cd repo-name`)
+4. **Branch**: Create a feature branch (`git checkout -b feature/xxx`).
+5. **Code**: Implement the changes with comprehensive tests
+6. **Testing**: (Golang project) Ensure tests pass (`go test ./...`) and follow Go code style conventions
+7. **Documentation**: Update documentation to support client-facing changes and use significant commit messages
+8. **Stage**: Stage changes (`git add .`)
+9. **Commit**: Commit changes (`git commit -m "Add feature xxx"`) ensuring backward compatible code
+10. **Push**: Push to the branch (`git push origin feature/xxx`).
+11. **PR**: Open a merge request on GitHub (on the GitHub webpage) with detailed description.
 
 Please ensure tests pass and include relevant documentation updates.
 
 ---
 
-## Support
+## 🌟 Support
 
-Welcome to contribute to this project by submitting pull requests and reporting issues.
+Welcome to contribute to this project via submitting merge requests and reporting issues.
 
-If you find this package valuable, give me some stars on GitHub! Thank you!!!
+**Project Support:**
 
-**Thank you for your support!**
+- ⭐ **Give GitHub stars** if this project helps you
+- 🤝 **Share with teammates** and (golang) programming friends
+- 📝 **Write tech blogs** about development tools and workflows - we provide content writing support
+- 🌟 **Join the ecosystem** - committed to supporting open source and the (golang) development scene
 
-**Happy Coding with this package!** 🎉
+**Have Fun Coding with this package!** 🎉🎉🎉
 
-Give me stars. Thank you!!!
+<!-- TEMPLATE (EN) END: STANDARD PROJECT FOOTER -->
 
 ---
 
 ## GitHub Stars
 
-[![starring](https://starchart.cc/go-xlan/sui-go-guide.svg?variant=adaptive)](https://starchart.cc/go-xlan/sui-go-guide)
+[![Stargazers](https://starchart.cc/go-xlan/sui-go-guide.svg?variant=adaptive)](https://starchart.cc/go-xlan/sui-go-guide)

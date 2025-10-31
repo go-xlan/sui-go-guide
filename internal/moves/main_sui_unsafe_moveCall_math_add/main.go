@@ -1,3 +1,12 @@
+// Package main: Demo application to call Move smart contract math add function
+// Demonstrates unsafe_moveCall RPC method with contract interaction
+// Shows how to invoke Move module function with parameters on testnet
+// Includes transaction simulation, signing, and execution with result logging
+//
+// main: 调用 Move 智能合约数学加法函数的演示应用程序
+// 演示带有合约交互的 unsafe_moveCall RPC 方法
+// 展示如何在测试网上使用参数调用 Move 模块函数
+// 包括交易模拟、签名和执行以及结果日志记录
 package main
 
 import (

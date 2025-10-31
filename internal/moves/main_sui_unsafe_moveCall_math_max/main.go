@@ -1,3 +1,12 @@
+// Package main: Demo application to call Move smart contract math max function
+// Demonstrates unsafe_moveCall RPC method with mainnet contract
+// Shows how to invoke Move module function to find maximum value
+// Includes transaction simulation with debug mode enabled
+//
+// main: 调用 Move 智能合约数学最大值函数的演示应用程序
+// 演示在主网合约上使用 unsafe_moveCall RPC 方法
+// 展示如何调用 Move 模块函数查找最大值
+// 包括启用调试模式的交易模拟
 package main
 
 import (

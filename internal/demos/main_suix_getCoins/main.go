@@ -1,3 +1,12 @@
+// Package main: Demo application to query coin objects owned by an address
+// Demonstrates suix_getCoins RPC method usage with mainnet
+// Shows how to retrieve paginated coin data from blockchain
+// Prints coin information including balance and object IDs
+//
+// main: 查询地址拥有的代币对象的演示应用程序
+// 演示在主网上使用 suix_getCoins RPC 方法
+// 展示如何从区块链检索分页的代币数据
+// 打印包括余额和对象 ID 在内的代币信息
 package main
 
 import (

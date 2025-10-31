@@ -1,3 +1,12 @@
+// Package main: Demo application to query all coin types and balances owned by address
+// Demonstrates suix_getAllBalances RPC method on mainnet
+// Shows how to retrieve balance summary across different coin types
+// Uses structured logging to display coin types and total balances
+//
+// main: 查询地址拥有的所有代币类型和余额的演示应用程序
+// 演示在主网上使用 suix_getAllBalances RPC 方法
+// 展示如何检索不同代币类型的余额摘要
+// 使用结构化日志显示代币类型和总余额
 package main
 
 import (

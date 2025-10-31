@@ -1,3 +1,12 @@
+// Package main: Demo application to query coin metadata from blockchain
+// Demonstrates suix_getCoinMetadata RPC method with multiple coin types
+// Shows how to retrieve display information like name, symbol, and decimals
+// Queries metadata from mainnet and logs results in JSON format
+//
+// main: 从区块链查询代币元数据的演示应用程序
+// 演示使用多种代币类型的 suix_getCoinMetadata RPC 方法
+// 展示如何检索显示信息，如名称、符号和小数位数
+// 从主网查询元数据并以 JSON 格式记录结果
 package main
 
 import (

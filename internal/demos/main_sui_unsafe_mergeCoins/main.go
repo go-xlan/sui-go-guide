@@ -1,3 +1,12 @@
+// Package main: Demo application to merge two SUI coin objects into one
+// Demonstrates unsafe_mergeCoins RPC method with coin selection
+// Shows complete workflow from coin query to merge execution
+// Includes random coin selection and transaction signing
+//
+// main: 将两个 SUI 代币对象合并为一个的演示应用程序
+// 演示带有代币选择的 unsafe_mergeCoins RPC 方法
+// 展示从代币查询到合并执行的完整工作流程
+// 包括随机代币选择和交易签名
 package main
 
 import (

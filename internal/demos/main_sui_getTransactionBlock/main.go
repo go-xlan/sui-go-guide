@@ -1,3 +1,12 @@
+// Package main: Demo application to query individual transaction block details
+// Demonstrates sui_getTransactionBlock RPC method with checkpoint navigation
+// Shows how to retrieve latest checkpoint and iterate through transactions
+// Logs transaction digests and detailed information from devnet
+//
+// main: 查询单个交易块详细信息的演示应用程序
+// 演示带有检查点导航的 sui_getTransactionBlock RPC 方法
+// 展示如何检索最新检查点并遍历交易
+// 从开发网记录交易摘要和详细信息
 package main
 
 import (

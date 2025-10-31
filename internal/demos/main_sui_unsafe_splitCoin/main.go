@@ -1,3 +1,12 @@
+// Package main: Demo application to split one SUI coin into multiple coins with custom amounts
+// Demonstrates unsafe_splitCoin RPC method with amount calculation
+// Shows how to divide coin balance into three parts and execute split
+// Includes coin selection, amount calculation, and transaction execution
+//
+// main: 将一个 SUI 代币拆分为多个自定义金额代币的演示应用程序
+// 演示带有金额计算的 unsafe_splitCoin RPC 方法
+// 展示如何将代币余额分成三部分并执行拆分
+// 包括代币选择、金额计算和交易执行
 package main
 
 import (

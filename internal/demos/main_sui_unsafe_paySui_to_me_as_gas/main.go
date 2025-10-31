@@ -1,3 +1,12 @@
+// Package main: Demo application to send SUI tokens back to sender using gas
+// Demonstrates unsafe_paySui method with self-transfer and gas usage
+// Shows how to transfer tokens to own address while paying gas fees
+// Includes transaction simulation, signing, and execution on testnet
+//
+// main: 使用 gas 将 SUI 代币发送回发送者的演示应用程序
+// 演示带有自我转账和 gas 使用的 unsafe_paySui 方法
+// 展示如何在支付 gas 费用的同时向自己的地址转账代币
+// 包括在测试网上的交易模拟、签名和执行
 package main
 
 import (

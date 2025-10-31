@@ -1,3 +1,12 @@
+// Package main: Demo application to split one SUI coin into equal amounts
+// Demonstrates unsafe_splitCoinEqual RPC method with count-based split
+// Shows how to divide coin balance into equal parts automatically
+// Includes coin selection and equal distribution transaction execution
+//
+// main: 将一个 SUI 代币平均拆分为多个相等金额的演示应用程序
+// 演示基于计数的 unsafe_splitCoinEqual RPC 方法
+// 展示如何自动将代币余额平均分成多个部分
+// 包括代币选择和平均分配交易执行
 package main
 
 import (

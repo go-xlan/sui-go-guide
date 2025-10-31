@@ -1,3 +1,12 @@
+// Package main: Demo application to transfer SUI tokens between addresses
+// Demonstrates complete transaction workflow from build to execution
+// Shows unsafe_transferSui method usage with testnet
+// Includes transaction simulation, signing, and execution steps
+//
+// main: 在地址之间转账 SUI 代币的演示应用程序
+// 演示从构建到执行的完整交易工作流程
+// 展示在测试网上使用 unsafe_transferSui 方法
+// 包括交易模拟、签名和执行步骤
 package main
 
 import (

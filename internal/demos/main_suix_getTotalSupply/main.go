@@ -1,3 +1,12 @@
+// Package main: Demo application to query total supply of different coin types
+// Demonstrates suix_getTotalSupply RPC method on mainnet
+// Shows how to retrieve maximum supply information from coin metadata
+// Queries multiple coin types and logs their supply values
+//
+// main: 查询不同代币类型总供应量的演示应用程序
+// 演示在主网上使用 suix_getTotalSupply RPC 方法
+// 展示如何从代币元数据检索最大供应量信息
+// 查询多种代币类型并记录其供应量值
 package main
 
 import (

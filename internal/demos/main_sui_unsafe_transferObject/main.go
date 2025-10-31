@@ -1,3 +1,12 @@
+// Package main: Demo application to transfer object ownership to another address
+// Demonstrates unsafe_transferObject RPC method with object transfer
+// Shows how to change ownership of blockchain objects
+// Includes debug mode and transaction simulation
+//
+// main: 将对象所有权转移到另一个地址的演示应用程序
+// 演示对象转移的 unsafe_transferObject RPC 方法
+// 展示如何更改区块链对象的所有权
+// 包括调试模式和交易模拟
 package main
 
 import (

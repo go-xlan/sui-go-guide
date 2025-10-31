@@ -1,3 +1,12 @@
+// Package main: Demo application to query coin balance with logging
+// Demonstrates suix_getCoins RPC method on testnet
+// Shows how to iterate through coin objects and log details
+// Uses structured logging to display balance and coin type
+//
+// main: 使用日志记录查询代币余额的演示应用程序
+// 演示在测试网上使用 suix_getCoins RPC 方法
+// 展示如何遍历代币对象并记录详细信息
+// 使用结构化日志显示余额和代币类型
 package main
 
 import (

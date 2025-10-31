@@ -1,3 +1,12 @@
+// Package main: Demo application to retrieve checkpoint information from blockchain
+// Demonstrates sui_getCheckpoint RPC method with sequence number query
+// Shows how to get latest checkpoint number and query checkpoint details
+// Prints checkpoint data in JSON format from devnet
+//
+// main: 从区块链检索检查点信息的演示应用程序
+// 演示带有序列号查询的 sui_getCheckpoint RPC 方法
+// 展示如何获取最新检查点编号并查询检查点详细信息
+// 从开发网以 JSON 格式打印检查点数据
 package main
 
 import (

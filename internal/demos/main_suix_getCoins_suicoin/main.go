@@ -1,3 +1,12 @@
+// Package main: Demo application to query SUI coin objects owned by address on testnet
+// Demonstrates suix_getCoins RPC method with coin type parameter
+// Shows how to filter coins by type to get native SUI tokens
+// Prints coin information in JSON format
+//
+// main: 查询测试网上地址拥有的 SUI 代币对象的演示应用程序
+// 演示带有代币类型参数的 suix_getCoins RPC 方法
+// 展示如何按类型过滤代币以获取原生 SUI 代币
+// 以 JSON 格式打印代币信息
 package main
 
 import (

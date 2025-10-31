@@ -1,3 +1,12 @@
+// Package main: Demo application to query multiple transaction blocks in batch
+// Demonstrates sui_multiGetTransactionBlocks RPC method with batch query
+// Shows how to retrieve multiple transactions from checkpoint efficiently
+// Logs transaction digests and processes results in batch from devnet
+//
+// main: 批量查询多个交易块的演示应用程序
+// 演示带有批量查询的 sui_multiGetTransactionBlocks RPC 方法
+// 展示如何高效地从检查点检索多个交易
+// 从开发网批量记录交易摘要并处理结果
 package main
 
 import (

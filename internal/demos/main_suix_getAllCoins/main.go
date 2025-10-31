@@ -1,3 +1,12 @@
+// Package main: Demo application to query all coin objects across all types owned by address
+// Demonstrates suix_getAllCoins RPC method on mainnet
+// Shows how to retrieve complete coin list regardless of coin type
+// Uses structured logging to display balance and type information
+//
+// main: 查询地址拥有的所有类型的所有代币对象的演示应用程序
+// 演示在主网上使用 suix_getAllCoins RPC 方法
+// 展示如何检索完整的代币列表，不考虑代币类型
+// 使用结构化日志显示余额和类型信息
 package main
 
 import (
